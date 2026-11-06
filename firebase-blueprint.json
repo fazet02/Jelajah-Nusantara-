@@ -1,0 +1,50 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile entity",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string", "maxLength": 100 },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["uid", "email"]
+    },
+    "SavedDestination": {
+      "title": "Saved Destination",
+      "description": "User saved favorite destination",
+      "type": "object",
+      "properties": {
+        "destinationId": { "type": "string", "maxLength": 128 },
+        "savedAt": { "type": "string" }
+      },
+      "required": ["destinationId"]
+    },
+    "Admin": {
+      "title": "Admin",
+      "description": "Admin authorization record",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" }
+      },
+      "required": ["uid", "email"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "User" },
+      "description": "User profile document"
+    },
+    "/users/{userId}/savedDestinations/{destinationId}": {
+      "schema": { "$ref": "SavedDestination" },
+      "description": "Saved favorite destinations for user"
+    },
+    "/admins/{userId}": {
+      "schema": { "$ref": "Admin" },
+      "description": "Admin list"
+    }
+  }
+}
